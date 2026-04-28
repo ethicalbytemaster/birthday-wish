@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A premium cinematic birthday website crafted for Riddhi with emotional storytelling, romantic scenes, and elegant interactive reveals." />
+  <title>Happy Birthday, Riddhi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.45rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2.4rem, 1.2rem + 3.8vw, 4.9rem);
+      --text-hero: clamp(3.4rem, 1.25rem + 6.8vw, 7.2rem);
+      --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+      --radius-sm: .5rem; --radius-md: .9rem; --radius-lg: 1.3rem; --radius-xl: 1.8rem; --radius-full: 999px;
+      --font-display: 'Playfair Display', serif;
+      --font-script: 'Dancing Script', cursive;
+      --font-body: 'Montserrat', sans-serif;
+      --bg-1: #060306;
+      --bg-2: #180713;
+      --bg-3: #2a0d17;
+      --surface: rgba(255,255,255,.08);
+      --surface-2: rgba(255,255,255,.05);
+      --border: rgba(255,255,255,.14);
+      --text: #fff6f8;
+      --muted: #dcc4cf;
+      --gold: #f5c96f;
+      --pink: #ff5aa5;
+      --pink-soft: #ffb2d5;
+      --red: #c21341;
+      --shadow-lg: 0 30px 80px rgba(255, 67, 138, 0.18);
+      --ease: 850ms cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-fast: 320ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: var(--font-body);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255, 90, 165, 0.14), transparent 24%),
+        radial-gradient(circle at 82% 0%, rgba(245, 201, 111, 0.12), transparent 20%),
+        radial-gradient(circle at 50% 100%, rgba(194, 19, 65, 0.22), transparent 34%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 44%, var(--bg-3) 72%, var(--bg-1) 100%);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, rgba(255,255,255,.04), transparent 28%, rgba(255,255,255,.015) 58%, transparent 100%);
+      mix-blend-mode: screen;
+    }
+    img, svg { display: block; max-width: 100%; }
+    button { font: inherit; border: 0; background: none; cursor: pointer; color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    .skip-link { position: absolute; left: -9999px; top: 0; }
+    .skip-link:focus { left: 1rem; top: 1rem; z-index: 100; background: #fff; color: #000; padding: .8rem 1rem; border-radius: .6rem; }
+    .site-header {
+      position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem clamp(1rem, 4vw, 3rem);
+      background: linear-gradient(to bottom, rgba(5,3,7,.86), rgba(5,3,7,.18), transparent);
+      backdrop-filter: blur(10px);
+    }
+    .brand { display: inline-flex; align-items: center; gap: .75rem; font-size: var(--text-xs); letter-spacing: .18em; text-transform: uppercase; }
+    .brand svg { width: 42px; height: 42px; color: var(--gold); filter: drop-shadow(0 0 18px rgba(245,201,111,.34)); }
+    .nav-links { display: flex; gap: 1rem; align-items: center; }
+    .nav-links a { color: var(--muted); font-size: var(--text-xs); }
+    .pill, .primary-btn, .step-btn { min-height: 46px; border-radius: var(--radius-full); transition: transform var(--ease-fast), box-shadow var(--ease-fast), background var(--ease-fast), border-color var(--ease-fast); }
+    .pill { padding: .9rem 1.25rem; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.06); }
+    .pill:hover, .step-btn:hover, .primary-btn:hover { transform: translateY(-2px); }
+    .primary-btn { padding: 1rem 1.5rem; color: #fff; background: linear-gradient(90deg, rgba(255,90,165,.96), rgba(194,19,65,.96)); box-shadow: 0 0 0 1px rgba(255,255,255,.16), 0 0 34px rgba(255,90,165,.35), 0 0 70px rgba(194,19,65,.22); }
+    main { position: relative; }
+    .section { min-height: 100vh; padding: clamp(5rem, 8vw, 7rem) clamp(1rem, 4vw, 4rem); display: grid; place-items: center; position: relative; }
+    .hero { overflow: hidden; }
+    .hearts-layer, .sparkles-layer, .fairy-layer, .balloon-layer { position: absolute; inset: 0; pointer-events: none; }
+    .hero-grid { width: min(1180px, 100%); display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
+    .eyebrow { color: var(--gold); font-size: var(--text-xs); letter-spacing: .28em; text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-family: var(--font-display); font-size: var(--text-hero); line-height: .94; max-width: 8ch; }
+    .gradient-title { background: linear-gradient(90deg, #fff7f8 0%, #ff9ecb 30%, #f5c96f 64%, #ff5aa5 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 6s linear infinite; }
+    @keyframes shimmer { to { background-position: 200% center; } }
+    .hero-copy p { margin-top: 1.5rem; max-width: 58ch; color: var(--muted); line-height: 1.8; font-size: var(--text-base); }
+    .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .hero-frame { position: relative; padding: 1rem; border-radius: var(--radius-xl); border: 1px solid var(--border); background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04)); backdrop-filter: blur(18px); box-shadow: var(--shadow-lg); overflow: hidden; }
+    .hero-frame::before { content: ""; position: absolute; width: 240px; height: 240px; top: -60px; left: -40px; border-radius: 50%; background: radial-gradient(circle, rgba(255,90,165,.32), transparent 66%); filter: blur(20px); }
+    .visual-card { min-height: 510px; border-radius: calc(var(--radius-xl) - .7rem); background: linear-gradient(180deg, rgba(7,4,8,.06), rgba(7,4,8,.44)), url('https://picsum.photos/seed/premium-romantic/1000/1300') center/cover; display: flex; align-items: flex-end; border: 1px solid rgba(245,201,111,.22); overflow: hidden; }
+    .visual-note { width: 100%; margin: 1rem; padding: 1.2rem; border-radius: var(--radius-lg); background: rgba(10, 6, 12, .62); border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(12px); }
+    .visual-note h2 { font-family: var(--font-script); font-size: clamp(2rem, 2vw + 1rem, 3rem); color: var(--pink-soft); }
+    .visual-note p { color: var(--muted); margin-top: .45rem; font-size: var(--text-sm); }
+    .glass-card { width: min(960px, 100%); padding: clamp(1.4rem, 3vw, 2rem); border-radius: var(--radius-xl); background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.04)); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(20px); box-shadow: var(--shadow-lg); }
+    .section-head { text-align: center; margin-bottom: 2rem; }
+    .section-head h2 { font-family: var(--font-display); font-size: var(--text-2xl); }
+    .section-head p { color: var(--muted); margin: .85rem auto 0; max-width: 54ch; line-height: 1.75; }
+    .slider-wrap { position: relative; min-height: 290px; }
+    .slide { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 1.5rem; opacity: 0; transform: scale(.92) translateY(18px); transition: opacity var(--ease), transform var(--ease); }
+    .slide.active { opacity: 1; transform: scale(1) translateY(0); }
+    .slide .scene-tag { font-family: var(--font-script); color: var(--pink-soft); font-size: clamp(2rem, 3vw, 3.4rem); }
+    .slide h3 { font-family: var(--font-display); font-size: clamp(2rem, 3vw, 3rem); margin-top: .8rem; }
+    .slide p { margin-top: .8rem; color: var(--muted); max-width: 40ch; }
+    .dots { display: flex; justify-content: center; gap: .75rem; margin-top: 1rem; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.14); }
+    .dot.active { background: linear-gradient(180deg, var(--pink), var(--gold)); transform: scale(1.1); }
+    .celebration-grid { width: min(1150px, 100%); display: grid; grid-template-columns: .95fr 1.05fr; gap: 2rem; align-items: stretch; }
+    .celebration-copy { display: flex; flex-direction: column; justify-content: center; }
+    .celebration-copy h2 { font-family: var(--font-display); font-size: var(--text-2xl); }
+    .celebration-copy p { color: var(--muted); line-height: 1.8; margin-top: 1rem; }
+    .steps { display: grid; gap: 1rem; margin-top: 2rem; }
+    .step-btn { text-align: left; padding: 1rem 1.2rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); min-height: 56px; }
+    .step-btn.active, .step-btn:hover { background: rgba(255,90,165,.13); border-color: rgba(255,178,213,.42); }
+    .hint { color: var(--muted); font-size: var(--text-sm); min-height: 3.6em; margin-top: .2rem; }
+    .celebration-stage { position: relative; min-height: 560px; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: radial-gradient(circle at 50% 12%, rgba(255,255,255,.05), transparent 24%), linear-gradient(180deg, #09060a, #130913 50%, #180914 100%); transition: background 1.2s var(--ease); }
+    .celebration-stage.bright { background: radial-gradient(circle at 50% 18%, rgba(255, 238, 190, .28), transparent 26%), linear-gradient(180deg, #261116, #6b1731 52%, #d36b5d 100%); }
+    .wire { position: absolute; top: 72px; left: 30px; right: 30px; height: 120px; border-top: 3px solid rgba(255,255,255,.16); border-radius: 50% 50% 0 0; }
+    .bulb { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,.16); transition: background .7s ease, box-shadow .7s ease; }
+    .bulb.on:nth-child(odd) { background: #ffd970; box-shadow: 0 0 16px #ffd970, 0 0 34px rgba(255,217,112,.8); }
+    .bulb.on:nth-child(even) { background: #ff90c0; box-shadow: 0 0 16px #ff90c0, 0 0 34px rgba(255,144,192,.8); }
+    .balloon { position: absolute; bottom: -140px; width: 82px; height: 104px; border-radius: 50% 50% 46% 46%; opacity: 0; animation: floatBalloon linear forwards; filter: drop-shadow(0 14px 28px rgba(0,0,0,.28)); }
+    .balloon::after { content: ""; position: absolute; left: 50%; bottom: -72px; width: 2px; height: 74px; background: rgba(255,255,255,.45); }
+    @keyframes floatBalloon { 0% { transform: translateY(0) translateX(0) rotate(0); opacity: 0; } 12% { opacity: 1; } 100% { transform: translateY(-108vh) translateX(var(--drift)) rotate(8deg); opacity: .96; } }
+    .curtain-shell { width: min(1140px, 100%); min-height: 620px; position: relative; overflow: hidden; border-radius: var(--radius-xl); border: 1px solid rgba(255,255,255,.12); box-shadow: var(--shadow-lg); background: radial-gradient(circle at 50% 28%, rgba(255,226,177,.18), transparent 34%), #14050b; }
+    .curtain-panel { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 2; transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1); background: linear-gradient(90deg, #5c021f, #9f0c2d 38%, #6f041d 72%, #410113 100%); box-shadow: inset -16px 0 40px rgba(0,0,0,.26); }
+    .curtain-left { left: 0; }
+    .curtain-right { right: 0; transform: scaleX(-1); }
+    .curtain-shell.open .curtain-left { transform: translateX(-92%); }
+    .curtain-shell.open .curtain-right { transform: scaleX(-1) translateX(-92%); }
+    .curtain-center { position: absolute; inset: 0; display: grid; place-items: center; padding: clamp(1rem, 4vw, 3rem); }
+    .letter-box { width: min(760px, 100%); padding: clamp(1.5rem, 3vw, 2.5rem); border-radius: var(--radius-xl); border: 1px solid rgba(255,255,255,.14); background: linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.05)); backdrop-filter: blur(18px); opacity: 0; transform: translateY(28px) scale(.96); transition: opacity 1s ease .75s, transform 1s ease .75s; }
+    .curtain-shell.open .letter-box { opacity: 1; transform: translateY(0) scale(1); }
+    .letter-box h3 { font-family: var(--font-script); color: var(--pink-soft); font-size: clamp(2.5rem, 3vw + 1rem, 4rem); margin-bottom: .75rem; }
+    .letter-box p { color: #f8dde6; line-height: 1.85; margin-top: 1rem; }
+    .sparkle { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.94); box-shadow: 0 0 18px rgba(255,255,255,.82), 0 0 28px rgba(245,201,111,.45); animation: twinkle 2.6s ease-in-out infinite; }
+    @keyframes twinkle { 0%,100% { opacity: .14; transform: scale(.58); } 50% { opacity: 1; transform: scale(1.25); } }
+    .gallery-wrap { width: min(1180px, 100%); }
+    .memory-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(12, 1fr); }
+    .memory-card { position: relative; min-height: 260px; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: #160b11; }
+    .memory-card:nth-child(1) { grid-column: span 5; }
+    .memory-card:nth-child(2) { grid-column: span 3; }
+    .memory-card:nth-child(3) { grid-column: span 4; }
+    .memory-card:nth-child(4) { grid-column: span 4; }
+    .memory-card:nth-child(5) { grid-column: span 5; }
+    .memory-card:nth-child(6) { grid-column: span 3; }
+    .memory-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-fast); }
+    .memory-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.72)); z-index: 1; }
+    .memory-card:hover img { transform: scale(1.08); }
+    .caption { position: absolute; inset: auto 0 0 0; z-index: 2; padding: 1.15rem; transform: translateY(16px); opacity: .88; transition: transform var(--ease-fast), opacity var(--ease-fast); }
+    .memory-card:hover .caption { transform: translateY(0); opacity: 1; }
+    .caption h4 { font-family: var(--font-display); font-size: clamp(1.1rem, 1rem + .7vw, 1.55rem); }
+    .caption p { color: #f0d8e2; margin-top: .4rem; font-size: var(--text-sm); line-height: 1.55; }
+    .action-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .footer { padding: 2rem 1rem 3rem; text-align: center; color: var(--muted); font-size: var(--text-sm); }
+    @media (max-width: 980px) {
+      .hero-grid, .celebration-grid { grid-template-columns: 1fr; }
+      .hero-frame { order: -1; }
+      h1 { max-width: none; }
+      .memory-card { grid-column: span 12 !important; }
+    }
+    @media (max-width: 720px) {
+      .nav-links a { display: none; }
+      .section { padding-inline: 1rem; }
+      .celebration-stage { min-height: 440px; }
+      .curtain-shell { min-height: 520px; }
+      .cta-row, .action-row { flex-direction: column; }
+      .pill, .primary-btn, .step-btn { width: 100%; }
+      .slide { padding: 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="brand" aria-label="Birthday cinema logo">
+      <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <path d="M32 56C21 48.8 10 40.2 10 26.8C10 18.7 16.1 13 23.3 13C28.1 13 31.1 15.5 32 18.2C32.9 15.5 35.9 13 40.7 13C47.9 13 54 18.7 54 26.8C54 40.2 43 48.8 32 56Z" fill="currentColor"/>
+        <path d="M24 24H40M32 17V31" stroke="#fff7f8" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>Birthday Cinema</span>
+    </div>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#messages">Journey</a>
+      <a href="#celebration">Celebration</a>
+      <a href="#curtain">Letter</a>
+      <button class="pill" data-scroll="#messages">Open Your Gift</button>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="section hero" id="hero">
+      <div class="hearts-layer" aria-hidden="true"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">A Cinematic Birthday Surprise</p>
+          <h1><span class="gradient-title">Happy Birthday, Riddhi</span></h1>
+          <p>A cinematic journey created just for you — filled with warmth, soft lights, a few quiet surprises, and the kind of emotion that feels like a beautiful movie scene written from the heart.</p>
+          <div class="cta-row">
+            <button class="primary-btn" data-scroll="#messages">Open Your Gift</button>
+            <button class="pill" data-scroll="#celebration">Begin The Story</button>
+          </div>
+        </div>
+        <div class="hero-frame">
+          <div class="visual-card">
+            <div class="visual-note">
+              <h2>A Journey Created Just For You</h2>
+              <p>Soft visuals, heartfelt words, glowing scenes, and little moments that make this birthday feel unforgettable.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="messages">
+      <div class="glass-card">
+        <div class="section-head">
+          <h2>The Opening Scene</h2>
+          <p>Three gentle moments to set the mood before the surprise opens completely.</p>
+        </div>
+        <div class="slider-wrap" aria-live="polite">
+          <article class="slide active"><div><div class="scene-tag">Scene One</div><h3>It's Your Special Day</h3><p>A day that deserves soft light, beautiful feelings, and a little celebration made with love.</p></div></article>
+          <article class="slide"><div><div class="scene-tag">Scene Two</div><h3>Have a look at it Madam Jii</h3><p>Every detail is waiting here for you, like a letter slowly unfolding under golden light.</p></div></article>
+          <article class="slide"><div><div class="scene-tag">Final Cue</div><h3>Ready for your surprise?</h3><p>The sweetest part of this little story is just ahead, and the curtain is almost ready to open.</p></div></article>
+        </div>
+        <div class="dots" role="tablist" aria-label="Message navigation">
+          <button class="dot active" aria-label="Slide 1"></button>
+          <button class="dot" aria-label="Slide 2"></button>
+          <button class="dot" aria-label="Slide 3"></button>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="celebration">
+      <div class="celebration-grid">
+        <div class="celebration-copy">
+          <h2>Set The Celebration</h2>
+          <p>Bring the whole scene to life one step at a time. Turn on the lights, start the music, release the balloons, and let the moment bloom into something magical.</p>
+          <div class="steps">
+            <button class="step-btn" data-action="lights">Step 1: Turn on fairy lights</button>
+            <button class="step-btn" data-action="music">Step 2: Play background music</button>
+            <button class="step-btn" data-action="balloons">Step 3: Launch floating balloons</button>
+            <button class="step-btn" data-action="continue">Step 4: Continue to next scene</button>
+            <p class="hint" id="hintText">Tap the first step to wake the fairy lights above the stage.</p>
+          </div>
+        </div>
+        <div class="celebration-stage" id="celebrationStage">
+          <div class="fairy-layer" id="fairyLayer"><div class="wire"></div></div>
+          <div class="balloon-layer" id="balloonLayer"></div>
+        </div>
+      </div>
+      <audio id="birthdayMusic" preload="none" loop>
+        <source src="assets/audio/birthday.mp3" type="audio/mpeg">
+      </audio>
+    </section>
+    <section class="section" id="curtain">
+      <div class="curtain-shell" id="curtainShell">
+        <div class="sparkles-layer" id="sparklesLayer" aria-hidden="true"></div>
+        <div class="curtain-panel curtain-left"></div>
+        <div class="curtain-panel curtain-right"></div>
+        <div class="curtain-center">
+          <div class="letter-box">
+            <h3>My Dearest Riddhi,</h3>
+            <p>Today isn't just a date on the calendar. It is a celebration of the light you bring so naturally into the world around you, and of the softness your presence leaves behind in every ordinary moment.</p>
+            <p>Every moment with you feels like a frame from a beautiful movie — quiet, glowing, unforgettable. You make simple things feel special, and even the smallest memory becomes warmer when it carries your smile.</p>
+            <p>On your birthday, I just want you to feel deeply loved, sincerely admired, and surrounded by the gentlest happiness. May this year bring you the kind of joy that stays, the kind of peace that heals, and the kind of dreams that come true exactly the way your heart deserves.</p>
+            <div class="action-row"><button class="primary-btn" data-scroll="#memories">Our Memories</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="action-row" style="margin-top: 1.5rem;"><button class="pill" id="revealCurtainBtn">Reveal The Letter</button></div>
+    </section>
+    <section class="section" id="memories">
+      <div class="gallery-wrap">
+        <div class="section-head">
+          <h2>Our Memories</h2>
+          <p>Romantic placeholders for the moments you want to keep forever. Replace these images later with your real memories.</p>
+        </div>
+        <div class="memory-grid">
+          <article class="memory-card"><img src="https://picsum.photos/seed/memory-one/900/1200" alt="Golden hour placeholder memory" width="900" height="1200" loading="lazy"><div class="caption"><h4>You make my world beautiful ❤️</h4><p>A soft frame for the warmth, calm, and happiness your presence brings.</p></div></article>
+          <article class="memory-card"><img src="https://picsum.photos/seed/memory-two/700/900" alt="Romantic floral placeholder memory" width="700" height="900" loading="lazy"><div class="caption"><h4>Our memories are forever ✨</h4><p>Some moments never fade; they only become more precious with time.</p></div></article>
+          <article class="memory-card"><img src="https://picsum.photos/seed/memory-three/800/1000" alt="City light placeholder memory" width="800" height="1000" loading="lazy"><div class="caption"><h4>My favorite smile in the world 💖</h4><p>The kind of smile that turns even an ordinary day into a beautiful one.</p></div></article>
+          <article class="memory-card"><img src="https://picsum.photos/seed/memory-four/900/1000" alt="Cozy date placeholder memory" width="900" height="1000" loading="lazy"><div class="caption"><h4>Every second with you is a gift 🎁</h4><p>The little things matter more when they are shared with someone special.</p></div></article>
+          <article class="memory-card"><img src="https://picsum.photos/seed/memory-five/1000/1000" alt="Rain mood placeholder memory" width="1000" height="1000" loading="lazy"><div class="caption"><h4>To many more adventures together 🥂</h4><p>For every new chapter, every laugh, and every memory still waiting ahead.</p></div></article>
+          <article class="memory-card"><img src="https://picsum.photos/seed/memory-six/700/1000" alt="Night drive placeholder memory" width="700" height="1000" loading="lazy"><div class="caption"><h4>Always & Forever 🌹</h4><p>A final frame for feelings that stay constant through every season.</p></div></article>
+        </div>
+        <div class="action-row"><button class="pill" id="replayBtn">Replay Experience</button><button class="primary-btn" data-scroll="#hero">Back To Start</button></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">Crafted with pure HTML, CSS, and JavaScript for a premium cinematic birthday surprise.</footer>
+  <script>
+    const scrollButtons = document.querySelectorAll('[data-scroll]');
+    scrollButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const target = document.querySelector(button.getAttribute('data-scroll'));
+        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    const heartsLayer = document.querySelector('.hearts-layer');
+    for (let i = 0; i < 24; i++) {
+      const heart = document.createElement('div');
+      heart.style.position = 'absolute';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.top = Math.random() * 100 + '%';
+      heart.style.width = heart.style.height = 12 + Math.random() * 16 + 'px';
+      heart.style.opacity = .12 + Math.random() * .28;
+      heart.style.animation = `floatHeart ${9 + Math.random() * 9}s linear ${Math.random() * 4}s infinite`;
+      heart.innerHTML = '<svg viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.6 0C20.5 0 17.9 1.6 16 4.1C14.1 1.6 11.5 0 8.4 0C3.8 0 0 3.8 0 8.5C0 17.5 16 29 16 29C16 29 32 17.5 32 8.5C32 3.8 28.2 0 23.6 0Z" fill="rgba(255,105,180,.84)"/></svg>';
+      heartsLayer.appendChild(heart);
+    });
+    const dynamicStyle = document.createElement('style');
+    dynamicStyle.textContent = `@keyframes floatHeart {0% { transform: translate3d(0,0,0) scale(.84); }50% { transform: translate3d(24px,-44px,0) scale(1); }100% { transform: translate3d(-18px,-118px,0) scale(.88); }}`;
+    document.head.appendChild(dynamicStyle);
+    const slides = [...document.querySelectorAll('.slide')];
+    const dots = [...document.querySelectorAll('.dot')];
+    let currentSlide = 0;
+    function setSlide(index) {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+      currentSlide = index;
+    }
+    dots.forEach((dot, index) => dot.addEventListener('click', () => setSlide(index)));
+    setInterval(() => setSlide((currentSlide + 1) % slides.length), 3800);
+    const fairyLayer = document.getElementById('fairyLayer');
+    for (let i = 0; i < 11; i++) {
+      const bulb = document.createElement('div');
+      bulb.className = 'bulb';
+      bulb.style.left = `${8 + i * 8.1}%`;
+      bulb.style.top = `${84 + Math.sin(i / 1.6) * 20}px`;
+      fairyLayer.appendChild(bulb);
+    }
+    const celebrationStage = document.getElementById('celebrationStage');
+    const balloonLayer = document.getElementById('balloonLayer');
+    const hintText = document.getElementById('hintText');
+    const music = document.getElementById('birthdayMusic');
+    const stepButtons = document.querySelectorAll('.step-btn');
+    function activateStep(action) { stepButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.action === action)); }
+    function launchBalloons() {
+      balloonLayer.innerHTML = '';
+      const palette = ['linear-gradient(180deg,#ff7db8,#d61d63)','linear-gradient(180deg,#ffd76d,#f28f01)','linear-gradient(180deg,#ffbfdc,#ff5aa5)','linear-gradient(180deg,#ffe9a4,#f5c96f)','linear-gradient(180deg,#ff6ba7,#8c124b)'];
+      for (let i = 0; i < 16; i++) {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.style.left = 4 + Math.random() * 90 + '%';
+        balloon.style.background = palette[i % palette.length];
+        balloon.style.animationDuration = 8 + Math.random() * 6 + 's';
+        balloon.style.animationDelay = Math.random() * 1.4 + 's';
+        balloon.style.setProperty('--drift', `${-60 + Math.random() * 120}px`);
+        balloonLayer.appendChild(balloon);
+      }
+    }
+    document.querySelector('[data-action="lights"]').addEventListener('click', () => {
+      activateStep('lights');
+      celebrationStage.classList.add('bright');
+      document.querySelectorAll('.bulb').forEach((bulb, i) => setTimeout(() => bulb.classList.add('on'), i * 80));
+      hintText.textContent = 'The fairy lights are glowing now. Start the music to deepen the mood of the scene.';
+    });
+    document.querySelector('[data-action="music"]').addEventListener('click', async () => {
+      activateStep('music');
+      try { await music.play(); hintText.textContent = 'The music is playing softly. Now let the balloons rise and brighten the whole frame.'; }
+      catch { hintText.textContent = 'Add your real song to assets/audio/birthday.mp3, then tap again if the browser blocks playback before interaction.'; }
+    });
+    document.querySelector('[data-action="balloons"]').addEventListener('click', () => {
+      activateStep('balloons'); launchBalloons(); hintText.textContent = 'The balloons are floating beautifully. Continue to the next scene for the letter reveal.';
+    });
+    document.querySelector('[data-action="continue"]').addEventListener('click', () => {
+      activateStep('continue'); hintText.textContent = 'The next scene is ready. Scroll down and open the curtain.'; document.querySelector('#curtain').scrollIntoView({ behavior: 'smooth' });
+    });
+    const curtainShell = document.getElementById('curtainShell');
+    document.getElementById('revealCurtainBtn').addEventListener('click', () => curtainShell.classList.toggle('open'));
+    const sparklesLayer = document.getElementById('sparklesLayer');
+    for (let i = 0; i < 24; i++) {
+      const sparkle = document.createElement('span');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = Math.random() * 100 + '%';
+      sparkle.style.top = Math.random() * 100 + '%';
+      sparkle.style.animationDelay = Math.random() * 2.4 + 's';
+      sparklesLayer.appendChild(sparkle);
+    }
+    document.getElementById('replayBtn').addEventListener('click', () => {
+      curtainShell.classList.remove('open');
+      celebrationStage.classList.remove('bright');
+      balloonLayer.innerHTML = '';
+      document.querySelectorAll('.bulb').forEach(b => b.classList.remove('on'));
+      music.pause(); music.currentTime = 0; setSlide(0); stepButtons.forEach(btn => btn.classList.remove('active'));
+      hintText.textContent = 'Tap the first step to wake the fairy lights above the stage.';
+      document.querySelector('#hero').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
