@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A cinematic birthday surprise for Patlu, from her Motu — filled with love, laughter, and the kind of moments only besties create." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="A cinematic birthday surprise for Patlu, from her Motu - filled with love, laughter, and the kind of moments only besties create." />
   <title>Happy Birthday, Patlu! | From Your Motu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,16 +12,22 @@
 </head>
 <body>
 
-      <!-- Background Music -->
-    <audio id="bgMusic" src="assets/audio/birthday.mp3" loop preload="auto"></audio>
+  <!-- Background Music -->
+  <audio id="bgMusic" src="assets/audio/birthday.mp3" loop preload="auto"></audio>
+
+  <!-- Particle Background Layer -->
+  <div id="particles" aria-hidden="true"></div>
+
+  <!-- Floating Elements Layer -->
+  <div class="floating-layer" aria-hidden="true"></div>
+
   <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- Header -->
   <header class="site-header">
     <div class="brand" aria-label="Birthday cinema logo">
       <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M32 56C21 48.8 10 40.2 10 26.8C10 18.7 16.1 13 23.3 13C28.1 13 31.1 15.5 32 18.2C32.9 15.5 35.9 13 40.7 13C47.9 13 54 18.7 54 26.8C54 40.2 43 48.8 32 56Z" fill="currentColor"/>
-        <path d="M24 24H40M32 17V31" stroke="#fff7f8" stroke-width="3" stroke-linecap="round"/>
+        <path d="M32 56C21 48.8 10 40.2 10 26.8C10 18.7 16.1 13 23.3 13C28.1 13 31.1 15.5 32 18.2C32.9 15.5 35.9 13 40.7 13C47.9 13 54 18.7 54 26.8C54 40.2 43 48.8 32 56Z" stroke="#fff7f8" stroke-width="3" stroke-linecap="round"/>
       </svg>
       <span>Motu x Patlu</span>
     </div>
@@ -31,108 +37,209 @@
       <a href="#curtain">Letter</a>
       <button class="pill" data-scroll="#messages">Open Your Gift</button>
     </nav>
+    <button class="mobile-menu-btn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <main id="main">
 
     <!-- Hero Section -->
-    <section class="section hero" id="hero">
+    <section class="section hero" aria-labelledby="hero-title">
+      <div class="hero-bg-overlay" aria-hidden="true"></div>
       <div class="hearts-layer" aria-hidden="true"></div>
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">A Cinematic Birthday Surprise</p>
-          <h1><span class="gradient-title">Happy Birthday, Patlu!</span></h1>
-          <p>A cinematic journey created just for you — filled with warmth, soft lights, a few quiet surprises, and the kind of emotion that feels like a beautiful movie scene written from the heart. From your Motu, with all the love in the world.</p>
+          <p class="hero-tag">A Cinematic Birthday Surprise</p>
+          <h1 id="hero-title" class="gradient-title">Happy Birthday, Patlu!</h1>
+          <p class="hero-copy-p">Patlu, yeh website sirf ek website nahi hai — yeh mere dil ki baatein hain, jo shabdon mein keh nahi paata, unhe tum tak pahunchane ka ek chhota sa tareeka hai. Tumhare liye har line likhi hai, har rang chuna hai, har animation socha hai. Kyunki tum deserve karti ho. — filled with warmth, soft lights, a few quiet surprises, and the kind of emotion that feels like a beautiful movie scene written from the heart. Tumhara Motu, hamesha tumhare saath.</p>
           <div class="cta-row">
-            <button class="primary-btn" data-scroll="#messages">Open Your Gift</button>
-            <button class="pill" data-scroll="#celebration">Begin The Story</button>
+            <button class="primary-btn glow-btn" data-scroll="#messages">
+              <span>Open Your Gift</span>
+              <span class="btn-sparkle" aria-hidden="true"></span>
+            </button>
+            <button class="secondary-btn" data-scroll="#messages">
+              <span>Begin The Story</span>
+            </button>
           </div>
         </div>
-         <!-- Message Slider Section -->
-    <section class="section" id="messages">
-      <div class="glass-card">
-        <div class="section-head">
-          <h2>The Opening Scene</h2>
-          <p>Three gentle moments to set the mood before the surprise opens completely.</p>
+      </div>
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="scroll-text">Scroll to begin</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- Message Slider Section -->
+    <section id="messages" class="section messages" aria-labelledby="messages-title">
+      <div class="section-head">
+        <p class="section-tag">Your Journey</p>
+        <h2 id="messages-title">A Few Words Just For You</h2>
+      </div>
+      <div class="slider-wrap">
+        <div class="slider-track">
+          <article class="slide active">
+            <span class="scene-tag">That Smile of Yours</span>
+            <h3>Patlu, tumhari smile dekh ke lagta hai jaise poora din bright ho gaya ho. Sach mein, ek smile mein itna sukoon aur itna pyaar hai jo main shabdon mein nahi bata sakta. Tum muskurao, bas itna kaafi hai mere liye.</h3>
+            <p>Patlu, your smile is the kind that makes everyone around you forget their worries. It's your superpower — and it's beautiful.</p>
+            <div class="slide-decor" aria-hidden="true"></div>
+          </article>
+          <article class="slide">
+            <span class="scene-tag">Your Beautiful Heart</span>
+            <h3>Patlu, tumhara dil itna saaf aur itna genuine hai ki kabhi kabhi lagta hai duniya aisi logon se bhari kyun nahi hai. Tum jo pyaar deti ho, woh sirf ek ehsaas nahi, ek tohfa hai.</h3>
+            <p>You care so deeply, so genuinely. The way you love your people — that's a rare kind of beautiful. Never change that.</p>
+            <div class="slide-decor" aria-hidden="true"></div>
+          </article>
+          <article class="slide">
+            <span class="scene-tag">Your Amazing Vibes</span>
+            <h3>Tumhara aas paas rehna hi alag feeling deta hai. Tumhari energy itni positive hai ki tumhara saath ho toh sab mushkil bhi aasaan lagta hai. Main hamesha tumhare saath rehna chahunga, bas itna.</h3>
+            <p>Being around you just feels different — lighter, brighter, happier. That's your energy, and it's absolutely magnetic.</p>
+            <div class="slide-decor" aria-hidden="true"></div>
+          </article>
+          <article class="slide">
+            <span class="scene-tag">Your Beautiful Soul</span>
+            <h3>Patlu, tumhari soch, tumhari baatein, tumhara har gesture — sab mein ek khaasiyat hai. Main jaanta hoon ki tum sirf ek dost se zyada ho mere liye, aur yehi woh ehsaas hai jo mujhe har din khush rakhta hai.</h3>
+            <p>The way you think, the way you feel, the way you just are — it's all so beautifully you. The world is lucky to have you.</p>
+            <div class="slide-decor" aria-hidden="true"></div>
+          </article>
+          <article class="slide">
+            <span class="scene-tag">Your Pure Joy</span>
+            <h3>Tumhari hansi, tumhari khushi dekh ke mujhe bhi khushi milti hai. Main chahta hoon ki tum hamesha aisi hi raho — muskurati hui, khush, beparwah. Kyunki tumhari khushi hi meri khushi hai, Patlu.</h3>
+            <p>Your laughter is contagious, your joy is infectious. You don't just feel happy — you make everyone around you happy too.</p>
+            <div class="slide-decor" aria-hidden="true"></div>
+          </article>
+          <article class="slide">
+            <span class="scene-tag">Simply You, Patlu</span>
+            <h3>Patlu, tum sirf ek dost nahi ho — tum woh ho jiske liye main kuch bhi kar sakta hoon. Main jaanta hoon ki shayad tumhe pata bhi nahi ki main tumse kitna pyaar karta hoon. Par aaj, tumhare birthday par, bas yeh kehna chahta hoon — Happy Birthday meri jaan. Hamesha khush raho. Tumhara Motu.</h3>
+            <p>There's no one else like you. And that's exactly how it should be. Happy Birthday to the most amazing bestie — from your Motu, forever.</p>
+            <div class="slide-decor" aria-hidden="true"></div>
+          </article>
         </div>
-        <div class="slider-wrap" aria-live="polite">
-          <article class="slide active"><div><div class="scene-tag">Scene One</div><h3>It's Your Special Day, Patlu!</h3><p>A day that deserves soft light, beautiful feelings, and a little celebration made with love — because the world is brighter with you in it.</p></div></article>
-          <article class="slide"><div><div class="scene-tag">Scene Two</div><h3>Have a look at it, Patlu Jii</h3><p>Every detail is waiting here for you, like a letter slowly unfolding under golden light. Your Motu put his whole heart into this.</p></div></article>
-          <article class="slide"><div><div class="scene-tag">Final Cue</div><h3>Ready for your surprise?</h3><p>The sweetest part of this little story is just ahead, and the curtain is almost ready to open. Patlu, are you ready?</p></div></article>
-        </div>
-        <div class="dots" role="tablist" aria-label="Message navigation">
-          <button class="dot active" aria-label="Slide 1"></button>
-          <button class="dot" aria-label="Slide 2"></button>
-          <button class="dot" aria-label="Slide 3"></button>
+        <div class="slider-controls">
+          <button class="slider-btn prev" aria-label="Previous slide">&#8249;</button>
+          <div class="slider-dots" role="tablist" aria-label="Slide navigation"></div>
+          <button class="slider-btn next" aria-label="Next slide">&#8250;</button>
         </div>
       </div>
     </section>
 
     <!-- Celebration Section -->
-    <section class="section" id="celebration">
+    <section id="celebration" class="section celebration" aria-labelledby="celebration-title">
+      <div class="celebration-bg" aria-hidden="true"></div>
+      <div class="balloon-layer" aria-hidden="true"></div>
+      <div class="section-head">
+        <p class="section-tag">Let's Celebrate</p>
+        <h2 id="celebration-title">Set The Celebration</h2>
+      </div>
+      <p class="section-desc">Patlu, yeh celebration tumhare liye hai. Ek ek step se hum milkar ise khubsurat banayenge. Lights on, music start, balloons release — bas ek ek karke, jaise tumhari life ke har moment special hain.. Turn on the lights, start the music, release the balloons. Watch it all come together — just like Patlu's special day.</p>
       <div class="celebration-grid">
-        <div class="celebration-copy">
-          <h2>Set The Celebration</h2>
-          <p>Bring the whole scene to life one step at a time, Patlu. Turn on the lights, start the music, release the balloons, and let the moment bloom into something magical — just like you make my world feel every day.</p>
-          <div class="steps">
-            <button class="step-btn" data-action="lights">Step 1: Turn on fairy lights</button>
-            <button class="step-btn" data-action="music">Step 2: Play background music</button>
-            <button class="step-btn" data-action="balloons">Step 3: Launch floating balloons</button>
-            <button class="step-btn" data-action="continue">Step 4: Continue to next scene</button>
-            <p class="hint" id="hintText">Tap the first step to wake the fairy lights above the stage.</p>
+        <div class="celebration-stage" id="celebrationStage">
+          <div class="stage-center">
+            <div class="stage-cake" aria-hidden="true">
+              <div class="cake-base"></div>
+              <div class="cake-top"></div>
+              <div class="cake-candle"></div>
+              <div class="cake-flame"></div>
+            </div>
           </div>
         </div>
-        <div class="celebration-stage" id="celebrationStage">
-          <div class="fairy-layer" id="fairyLayer"><div class="wire"></div></div>
-          <div class="balloon-layer" id="balloonLayer"></div>
+        <div class="celebration-controls">
+          <button class="action-btn" data-action="lights" aria-pressed="false">
+            <span class="action-icon" aria-hidden="true">&#9728;</span>
+            <span class="action-text">Turn On Lights</span>
+          </button>
+          <button class="action-btn" data-action="music" aria-pressed="false">
+            <span class="action-icon" aria-hidden="true">&#9835;</span>
+            <span class="action-text">Start Music</span>
+          </button>
+          <button class="action-btn" data-action="balloons" aria-pressed="false">
+            <span class="action-icon" aria-hidden="true">&#127880;</span>
+            <span class="action-text">Release Balloons</span>
+          </button>
+          <button class="action-btn continue-btn" data-action="continue" aria-pressed="false">
+            <span class="action-icon" aria-hidden="true">&#127881;</span>
+            <span class="action-text">Continue</span>
+          </button>
         </div>
       </div>
-      <audio id="birthdayMusic" preload="none" loop>
-        <source src="assets/audio/birthday.mp3" type="audio/mpeg">
-      </audio>
     </section>
 
     <!-- Curtain Reveal Section -->
-    <section class="section" id="curtain">
+    <section id="curtain" class="section curtain" aria-labelledby="curtain-title">
+      <div class="curtain-bg" aria-hidden="true"></div>
+      <div class="section-head">
+        <p class="section-tag">Final Cue</p>
+        <h2 id="curtain-title">Patlu, Kya Tum Tayyar Ho?</h2>
+      </div>
+      <p class="section-desc">Yeh curtain sirf ek curtain nahi hai — yeh mere dil ka woh hissa hai jo aaj tak band tha. Ab kholne ka waqt aa gaya hai.</p>
       <div class="curtain-shell" id="curtainShell">
-        <div class="sparkles-layer" id="sparklesLayer" aria-hidden="true"></div>
-        <div class="curtain-panel curtain-left"></div>
-        <div class="curtain-panel curtain-right"></div>
-        <div class="curtain-center">
-          <div class="letter-box">
-            <h3>My Dearest Patlu,</h3>
-            <p>Today isn't just a date on the calendar. It is a celebration of the light you bring so naturally into the world around you, and of the softness your presence leaves behind in every ordinary moment.</p>
-            <p>Every moment with you feels like a frame from a beautiful movie — quiet, glowing, unforgettable. You make simple things feel special, and even the smallest memory becomes warmer when it carries your smile. From silly conversations to quiet understanding, every moment with you is a gift I never take for granted.</p>
-            <p>On your birthday, I just want you to feel deeply loved, sincerely admired, and surrounded by the gentlest happiness. May this year bring you the kind of joy that stays, the kind of peace that heals, and the kind of dreams that come true exactly the way your heart deserves. Because if anyone in this world deserves it all, it is you, Patlu.</p>
-            <p style="text-align: right; margin-top: 1.5rem; font-family: var(--font-script); color: var(--gold); font-size: 1.5rem;">— Always, Your Motu</p>
-            <div class="action-row"><button class="primary-btn" data-scroll="#memories">Our Memories</button></div>
+        <div class="curtain-panel curtain-left" aria-hidden="true"></div>
+        <div class="curtain-panel curtain-right" aria-hidden="true"></div>
+        <div class="letter-box">
+          <div class="letter-inner">
+            <span class="letter-icon" aria-hidden="true">&#9993;</span>
+            <p>Dear Patlu,</p>
+            <p>Main jaanta hoon ki yeh sab shayad tumhe thoda ajeeb lage. Par sach bolu toh, main tumse pyaar karta hoon. Pehle din se, jab tum muskurayi thi, tab se. Tum meri best friend ho, meri partner in crime ho, meri Patlu ho. Aur main bas chahta hoon ki tum hamesha aisi hi raho — khush, muskurati hui, beparwah.</p>
+            <p>Aaj tumhara din hai. Jeet lo duniya. Main hamesha tumhare saath hoon. Always.</p>
+            <p style="margin-top: 1.5rem; font-family: var(--font-script); font-size: 1.8rem; color: var(--pink-400);">Forever yours,<br/><span style="color: var(--gold);">~ Motu</span></p>
           </div>
         </div>
       </div>
-      <div class="action-row" style="margin-top: 1.5rem;"><button class="pill" id="revealCurtainBtn">Reveal The Letter</button></div>
-    </section>
-
-    <!-- Memory Gallery Section -->
-    <section class="section" id="memories">
-      <div class="gallery-wrap">
-        <div class="section-head">
-          <h2>Why You're Special, Patlu</h2>
-          <p>Six beautiful things about you that make you so loved. Each photo tells a story — your smile, your warmth, your light. Add your photos and make it perfect.</p>
-        </div>
-        <div class="memory-grid">
-          <article class="memory-card"><img src="assets/images/patlu1.jpeg" alt="Patlu's beautiful smile" width="900" height="1200" loading="lazy"><div class="caption"><h4>That Smile of Yours ❤️</h4><p>The kind of smile that lights up every room. Keep smiling, Patlu — the world needs it.</p></div></article>
-          <article class="memory-card"><img src="assets/images/patlu2.jpeg" alt="Patlu's graceful presence" width="700" height="900" loading="lazy"><div class="caption"><h4>Your Beautiful Heart ✨</h4><p>Not everyone has a heart as kind and warm as yours. That is what makes you so special.</p></div></article>
-          <article class="memory-card"><img src="assets/images/patlu3.jpeg" alt="Patlu's charming vibe" width="800" height="1000" loading="lazy"><div class="caption"><h4>Your Amazing Vibes 💖</h4><p>Being around you just feels right. You make every moment better, Patlu.</p></div></article>
-          <article class="memory-card"><img src="assets/images/patlu4.jpeg" alt="Patlu's elegance" width="900" height="1000" loading="lazy"><div class="caption"><h4>Your Beautiful Soul 🎁</h4><p>The way you care, the way you love — it is something rare and precious.</p></div></article>
-          <article class="memory-card"><img src="assets/images/patlu5.jpeg" alt="Patlu's happiness" width="1000" height="1000" loading="lazy"><div class="caption"><h4>Your Pure Joy 🥂</h4><p>The happiness you bring into people's lives is your superpower, Patlu.</p></div></article>
-          <article class="memory-card"><img src="assets/images/patlu6.jpeg" alt="Patlu's elegance" width="700" height="1000" loading="lazy"><div class="caption"><h4>Simply You, Patlu 🌹</h4><p>No matter where you go, no matter what you do — you are always enough. Motu x Patlu, forever.</p></div></article>
-        </div>
-        <div class="action-row"><button class="pill" id="replayBtn">Replay Experience</button><button class="primary-btn" data-scroll="#hero">Back To Start</button></div>
+      <div class="action-row" style="margin-top: 2.5rem; justify-content: center;">
+        <button class="primary-btn glow-btn" id="revealCurtainBtn">
+          <span>Curtain Kholo</span>
+          <span class="btn-sparkle" aria-hidden="true"></span>
+        </button>
       </div>
     </section>
-  </main>
 
-  <footer class="footer">A cinematic birthday surprise for Patlu, crafted with love by her Motu. Pure HTML, CSS, and JavaScript.</footer>
+    <!-- Gallery Section -->
+    <section class="section gallery" aria-labelledby="gallery-title">
+      <div class="gallery-bg" aria-hidden="true"></div>
+      <div class="section-head">
+        <p class="section-tag">Patlu Ke Pal</p>
+        <h2 id="gallery-title">Tumhari Har Photo Ek Kahani Hai</h2>
+      </div>
+      <p class="section-desc">Yeh sirf photos nahi hain, Patlu — yeh woh pal hain jo tumhe itni khoobsurat banate hain. Har ek mein tumhari alag si roshni hai.</p>
+      <div class="memory-grid">
+        <article class="memory-card" style="grid-column: span 5;">
+          <img src="assets/images/patlu1.jpeg" alt="Patlu's beautiful smile" width="900" height="1200" loading="lazy" />
+          <div class="caption">Patlu's Beautiful Smile &#10084;&#65039;</div>
+        </article>
+        <article class="memory-card" style="grid-column: span 4;">
+          <img src="assets/images/patlu2.jpeg" alt="Patlu's graceful presence" width="700" height="900" loading="lazy" />
+          <div class="caption">Patlu's Graceful Presence &#9733;</div>
+        </article>
+        <article class="memory-card" style="grid-column: span 3;">
+          <img src="assets/images/patlu3.jpeg" alt="Patlu's charming vibe" width="800" height="1000" loading="lazy" />
+          <div class="caption">Patlu's Charming Vibe &#128151;</div>
+        </article>
+        <article class="memory-card" style="grid-column: span 3;">
+          <img src="assets/images/patlu4.jpeg" alt="Patlu's elegance" width="900" height="1000" loading="lazy" />
+          <div class="caption">Patlu's Elegance &#127873;</div>
+        </article>
+        <article class="memory-card" style="grid-column: span 5;">
+          <img src="assets/images/patlu5.jpeg" alt="Patlu's happiness" width="1000" height="1000" loading="lazy" />
+          <div class="caption">Patlu's Pure Happiness &#127881;</div>
+        </article>
+        <article class="memory-card" style="grid-column: span 4;">
+          <img src="assets/images/patlu6.jpeg" alt="Patlu's elegance" width="700" height="1000" loading="lazy" />
+          <div class="caption">Simply Patlu &#127799;</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p class="footer-tag">Made with &#10084; for</p>
+        <h3>Patlu</h3>
+        <p class="footer-from">From your Motu, hamesha tumhare saath</p>
+        <div class="footer-heart" aria-hidden="true">&#10084;</div>
+      </div>
+    </footer>
+
+  </main>
 
   <script src="js/main.js"></script>
 </body>
