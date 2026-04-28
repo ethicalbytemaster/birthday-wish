@@ -175,3 +175,23 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#hero')?.scrollIntoView({ behavior: 'smooth' });
   });
 });
+
+// Background music playback
+const bgMusic = document.getElementById('bgMusic');
+let music = bgMusic; // alias for existing music references
+
+// Play music on first user interaction (browsers block autoplay)
+document.addEventListener('click', function playMusicOnFirstClick() {
+  if (bgMusic) {
+    bgMusic.play().catch(e => console.log('Autoplay prevented:', e));
+  }
+  document.removeEventListener('click', playMusicOnFirstClick);
+});
+
+// Also try playing on scroll
+document.addEventListener('scroll', function playMusicOnScroll() {
+  if (bgMusic && bgMusic.paused) {
+    bgMusic.play().catch(e => {});
+  }
+  document.removeEventListener('scroll', playMusicOnScroll);
+});
