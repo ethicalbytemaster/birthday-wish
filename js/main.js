@@ -97,12 +97,20 @@ if (slides.length > 0 && sliderDots) {
   prevBtn?.addEventListener('click', () => setSlide((currentSlide - 1 + slides.length) % slides.length));
   nextBtn?.addEventListener('click', () => setSlide((currentSlide + 1) % slides.length));
 
-  let autoSlide = setInterval(() => setSlide((currentSlide + 1) % slides.length), 5000);
-  [prevBtn, nextBtn, sliderDots].forEach(el => {
-    el?.addEventListener('mouseenter', () => clearInterval(autoSlide));
-    el?.addEventListener('mouseleave', () => {
-      autoSlide = setInterval(() => setSlide((currentSlide + 1) % slides.length), 5000);
-    });
+
+  
+// Tap on slide to go to next (no auto-advance - user controls the pace)
+slides.forEach(slide => {
+  slide.addEventListener('click', () => {
+    setSlide((currentSlide + 1) % slides.length);
+  });
+});
+
+// Also add keyboard navigation
+if (slides.length > 0) {
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') setSlide((currentSlide + 1) % slides.length);
+    if (e.key === 'ArrowLeft') setSlide((currentSlide - 1 + slides.length) % slides.length);
   });
 }
 
