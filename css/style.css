@@ -757,19 +757,7 @@ body {
 
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .ctrl-btn {
-    width: 48px;
-    height: 48px;
-  }
-
-  .messages {
-    padding: var(--space-6) var(--space-3);
-  }
-}
-}
-
+  
 /* Print */
 @media print {
   .site-header, .mobile-menu-btn, .scroll-indicator, .balloon-layer, .floating-layer, #particles,
