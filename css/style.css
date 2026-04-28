@@ -129,29 +129,6 @@ h1 { font-family: var(--font-display); font-size: var(--text-hero); line-height:
 }
 @keyframes shimmer { to { background-position: 200% center; } }
 .hero-copy p { margin-top: 1.5rem; max-width: 58ch; color: var(--muted); line-height: 1.8; font-size: var(--text-base); }
-.cta-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-
-.hero-frame {
-  position: relative; padding: 1rem; border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
-  backdrop-filter: blur(18px); box-shadow: var(--shadow-lg); overflow: hidden;
-}
-.hero-frame::before {
-  content: ""; position: absolute; width: 240px; height: 240px;
-  top: -60px; left: -40px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,90,165,.32), transparent 66%);
-  filter: blur(20px);
-}
-.visual-card {
-  min-height: 510px; border-radius: calc(var(--radius-xl) - .7rem);
-  background: linear-gradient(180deg, rgba(7,4,8,.06), rgba(7,4,8,.44)), url('https://picsum.photos/seed/premium-romantic/1000/1300') center/cover;
-  display: flex; align-items: flex-end; border: 1px solid rgba(245,201,111,.22); overflow: hidden;
-}
-.visual-note { width: 100%; margin: 1rem; padding: 1.2rem; border-radius: var(--radius-lg); background: rgba(10, 6, 12, .62); border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(12px); }
-.visual-note h2 { font-family: var(--font-script); font-size: clamp(2rem, 2vw + 1rem, 3rem); color: var(--pink-soft); }
-.visual-note p { color: var(--muted); margin-top: .45rem; font-size: var(--text-sm); }
-
 /* === Message Slider Section === */
 .glass-card {
   width: min(960px, 100%);
