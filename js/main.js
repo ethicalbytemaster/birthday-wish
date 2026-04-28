@@ -1,9 +1,46 @@
 /**
  * Cinematic Birthday Website
- * Main JavaScript - main.js
+ * Enhanced JavaScript - main.js
  */
 
-// Smooth scroll navigation
+// === Particle Background ===
+function initParticles() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  const particleCount = Math.min(60, Math.floor(window.innerWidth / 18));
+  for (let i = 0; i < particleCount; i++) {
+    const span = document.createElement('span');
+    const size = Math.random() * 4 + 2;
+    span.style.cssText = `
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      width: ${size}px; height: ${size}px;
+      --size: ${size * 2}px;
+      --dur: ${3 + Math.random() * 4}s;
+      animation-delay: ${Math.random() * 3}s;
+    `;
+    container.appendChild(span);
+  }
+}
+initParticles();
+
+// === Mobile Menu Toggle ===
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+if (mobileMenuBtn && navLinks) {
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.classList.toggle('active');
+    navLinks.classList.toggle('mobile-open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenuBtn.classList.remove('active');
+      navLinks.classList.remove('mobile-open');
+    });
+  });
+}
+
+// === Smooth Scroll Navigation ===
 document.querySelectorAll('[data-scroll]').forEach(button => {
   button.addEventListener('click', () => {
     const target = document.querySelector(button.getAttribute('data-scroll'));
@@ -11,187 +48,219 @@ document.querySelectorAll('[data-scroll]').forEach(button => {
   });
 });
 
-// Floating hearts in hero section
+// === Floating Hearts in Hero ===
 function createFloatingHearts() {
   const heartsLayer = document.querySelector('.hearts-layer');
   if (!heartsLayer) return;
-  for (let i = 0; i < 24; i++) {
+  const heartCount = Math.min(20, Math.floor(window.innerWidth / 45));
+  for (let i = 0; i < heartCount; i++) {
     const heart = document.createElement('div');
     heart.style.cssText = `
       position: absolute;
       left: ${Math.random() * 100}%;
       top: ${Math.random() * 100}%;
-      width: ${12 + Math.random() * 16}px;
-      height: ${12 + Math.random() * 16}px;
-      opacity: ${0.12 + Math.random() * 0.28};
-      animation: floatHeart ${9 + Math.random() * 9}s linear ${Math.random() * 4}s infinite;
+      width: ${10 + Math.random() * 14}px;
+      height: ${10 + Math.random() * 14}px;
+      opacity: ${0.1 + Math.random() * 0.25};
+      animation: floatHeart ${8 + Math.random() * 8}s linear ${Math.random() * 4}s infinite;
     `;
-    heart.innerHTML = '<svg viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.6 0C20.5 0 17.9 1.6 16 4.1C14.1 1.6 11.5 0 8.4 0C3.8 0 0 3.8 0 8.5C0 17.5 16 29 16 29C16 29 32 17.5 32 8.5C32 3.8 28.2 0 23.6 0Z" fill="rgba(255,105,180,.84)"/></svg>';
+    heart.innerHTML = '&#10084;';
+    heart.style.color = 'rgba(255, 90, 165, 0.35)';
+    heart.style.fontSize = '1em';
     heartsLayer.appendChild(heart);
   }
 }
 createFloatingHearts();
 
-// Message slider
-document.addEventListener('DOMContentLoaded', () => {
-  const slides = [...document.querySelectorAll('.slide')];
-  const dots = [...document.querySelectorAll('.dot')];
-  let currentSlide = 0;
+// === Message Slider ===
+const slides = document.querySelectorAll('.slide');
+const sliderDots = document.querySelector('.slider-dots');
+const prevBtn = document.querySelector('.slider-btn.prev');
+const nextBtn = document.querySelector('.slider-btn.next');
+let currentSlide = 0;
+
+if (slides.length > 0 && sliderDots) {
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => setSlide(i));
+    sliderDots.appendChild(dot);
+  });
 
   function setSlide(index) {
     slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    sliderDots.querySelectorAll('button').forEach((dot, i) => dot.classList.toggle('active', i === index));
     currentSlide = index;
   }
 
-  dots.forEach((dot, index) => dot.addEventListener('click', () => setSlide(index)));
-  setInterval(() => setSlide((currentSlide + 1) % slides.length), 3800);
-});
+  prevBtn?.addEventListener('click', () => setSlide((currentSlide - 1 + slides.length) % slides.length));
+  nextBtn?.addEventListener('click', () => setSlide((currentSlide + 1) % slides.length));
 
-// Celebration stage interactions
-document.addEventListener('DOMContentLoaded', () => {
-  const celebrationStage = document.getElementById('celebrationStage');
-  const fairyLayer = document.getElementById('fairyLayer');
-  const balloonLayer = document.getElementById('balloonLayer');
-  const hintText = document.getElementById('hintText');
-  const music = document.getElementById('birthdayMusic');
-  const stepButtons = document.querySelectorAll('.step-btn');
-
-  // Create fairy bulbs
-  for (let i = 0; i < 11; i++) {
-    const bulb = document.createElement('div');
-    bulb.className = 'bulb';
-    bulb.style.left = `${8 + i * 8.1}%`;
-    bulb.style.top = `${84 + Math.sin(i / 1.6) * 20}px`;
-    fairyLayer?.appendChild(bulb);
-  }
-
-  function activateStep(action) {
-    stepButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.action === action));
-  }
-
-  function launchBalloons() {
-    if (!balloonLayer) return;
-    balloonLayer.innerHTML = '';
-    const palette = [
-      'linear-gradient(180deg,#ff7db8,#d61d63)',
-      'linear-gradient(180deg,#ffd76d,#f28f01)',
-      'linear-gradient(180deg,#ffbfdc,#ff5aa5)',
-      'linear-gradient(180deg,#ffe9a4,#f5c96f)',
-      'linear-gradient(180deg,#ff6ba7,#8c124b)'
-    ];
-    for (let i = 0; i < 16; i++) {
-      const balloon = document.createElement('div');
-      balloon.className = 'balloon';
-      balloon.style.left = `${4 + Math.random() * 90}%`;
-      balloon.style.background = palette[i % palette.length];
-      balloon.style.animationDuration = `${8 + Math.random() * 6}s`;
-      balloon.style.animationDelay = `${Math.random() * 1.4}s`;
-      balloon.style.setProperty('--drift', `${-60 + Math.random() * 120}px`);
-      balloonLayer.appendChild(balloon);
-    }
-  }
-
-  // Step 1: Lights
-  document.querySelector('[data-action="lights"]')?.addEventListener('click', () => {
-    activateStep('lights');
-    celebrationStage?.classList.add('bright');
-    document.querySelectorAll('.bulb').forEach((bulb, i) => setTimeout(() => bulb.classList.add('on'), i * 80));
-    if (hintText) hintText.textContent = 'The fairy lights are glowing now. Start the music to deepen the mood of the scene.';
+  let autoSlide = setInterval(() => setSlide((currentSlide + 1) % slides.length), 5000);
+  [prevBtn, nextBtn, sliderDots].forEach(el => {
+    el?.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    el?.addEventListener('mouseleave', () => {
+      autoSlide = setInterval(() => setSlide((currentSlide + 1) % slides.length), 5000);
+    });
   });
+}
 
-  // Step 2: Music
-  document.querySelector('[data-action="music"]')?.addEventListener('click', async () => {
-    activateStep('music');
-    try {
-      await music?.play();
-      if (hintText) hintText.textContent = 'The music is playing softly. Now let the balloons rise and brighten the whole frame.';
-    } catch {
-      if (hintText) hintText.textContent = 'Add your real song to assets/audio/birthday.mp3, then tap again if the browser blocks playback before interaction.';
-    }
-  });
-
-  // Step 3: Balloons
-  document.querySelector('[data-action="balloons"]')?.addEventListener('click', () => {
-    activateStep('balloons');
-    launchBalloons();
-    if (hintText) hintText.textContent = 'The balloons are floating beautifully. Continue to the next scene for the letter reveal.';
-  });
-
-  // Step 4: Continue
-  document.querySelector('[data-action="continue"]')?.addEventListener('click', () => {
-    activateStep('continue');
-    if (hintText) hintText.textContent = 'The next scene is ready. Scroll down and open the curtain.';
-    document.querySelector('#curtain')?.scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
-// Curtain reveal
-document.addEventListener('DOMContentLoaded', () => {
-  const curtainShell = document.getElementById('curtainShell');
-  const sparklesLayer = document.getElementById('sparklesLayer');
-
-  document.getElementById('revealCurtainBtn')?.addEventListener('click', () => {
-    curtainShell?.classList.toggle('open');
-  });
-
-  // Create sparkles
-  if (sparklesLayer) {
-    for (let i = 0; i < 24; i++) {
-      const sparkle = document.createElement('span');
-      sparkle.className = 'sparkle';
-      sparkle.style.left = `${Math.random() * 100}%`;
-      sparkle.style.top = `${Math.random() * 100}%`;
-      sparkle.style.animationDelay = `${Math.random() * 2.4}s`;
-      sparklesLayer.appendChild(sparkle);
-    }
-  }
-});
-
-// Replay button
-document.addEventListener('DOMContentLoaded', () => {
-  const replayBtn = document.getElementById('replayBtn');
-  const music = document.getElementById('birthdayMusic');
-  const balloonLayer = document.getElementById('balloonLayer');
-  const curtainShell = document.getElementById('curtainShell');
-  const celebrationStage = document.getElementById('celebrationStage');
-  const hintText = document.getElementById('hintText');
-
-  replayBtn?.addEventListener('click', () => {
-    curtainShell?.classList.remove('open');
-    celebrationStage?.classList.remove('bright');
-    if (balloonLayer) balloonLayer.innerHTML = '';
-    document.querySelectorAll('.bulb').forEach(b => b.classList.remove('on'));
-    music?.pause();
-    if (music) music.currentTime = 0;
-    const dots = document.querySelectorAll('.dot');
-    const slides = document.querySelectorAll('.slide');
-    slides.forEach(s => s.classList.remove('active'));
-    slides[0]?.classList.add('active');
-    dots.forEach(d => d.classList.remove('active'));
-    dots[0]?.classList.add('active');
-    document.querySelectorAll('.step-btn').forEach(btn => btn.classList.remove('active'));
-    if (hintText) hintText.textContent = 'Tap the first step to wake the fairy lights above the stage.';
-    document.querySelector('#hero')?.scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
-// Background music playback
+// === Celebration Section ===
+const celebrationStage = document.getElementById('celebrationStage');
+const stepButtons = document.querySelectorAll('.action-btn');
+const balloonLayer = document.querySelector('.balloon-layer');
 const bgMusic = document.getElementById('bgMusic');
-let music = bgMusic; // alias for existing music references
+let music = bgMusic;
+let musicStarted = false;
 
-// Play music on first user interaction (browsers block autoplay)
-document.addEventListener('click', function playMusicOnFirstClick() {
-  if (bgMusic) {
-    bgMusic.play().catch(e => console.log('Autoplay prevented:', e));
+function activateStep(action) {
+  stepButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.action === action));
+}
+
+function launchBalloons() {
+  if (!balloonLayer) return;
+  balloonLayer.innerHTML = '';
+  const palette = [
+    'linear-gradient(180deg,#ff7db8,#d61d63)',
+    'linear-gradient(180deg,#ffd76d,#f28f01)',
+    'linear-gradient(180deg,#ffbfdc,#ff5aa5)',
+    'linear-gradient(180deg,#ffe9a4,#f5c96f)',
+    'linear-gradient(180deg,#ff6ba7,#8c124b)'
+  ];
+  const balloonCount = Math.min(14, Math.floor(window.innerWidth / 28));
+  for (let i = 0; i < balloonCount; i++) {
+    const balloon = document.createElement('div');
+    balloon.className = 'balloon';
+    balloon.style.left = `${3 + Math.random() * 92}%`;
+    balloon.style.background = palette[i % palette.length];
+    balloon.style.animationDuration = `${7 + Math.random() * 5}s`;
+    balloon.style.animationDelay = `${Math.random() * 1.2}s`;
+    balloon.style.setProperty('--drift', `${-50 + Math.random() * 100}px`);
+    balloonLayer.appendChild(balloon);
   }
-  document.removeEventListener('click', playMusicOnFirstClick);
+}
+
+stepButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const action = btn.dataset.action;
+    if (action === 'lights') {
+      celebrationStage?.classList.toggle('lit');
+      activateStep(action);
+    } else if (action === 'music') {
+      if (music && !musicStarted) {
+        music.play().then(() => { musicStarted = true; }).catch(() => {});
+      } else if (music && musicStarted) {
+        music.paused ? music.play() : music.pause();
+      }
+      activateStep(action);
+    } else if (action === 'balloons') {
+      launchBalloons();
+      activateStep(action);
+    } else if (action === 'continue') {
+      celebrationStage?.classList.add('lit');
+      launchBalloons();
+      activateStep(action);
+      setTimeout(() => {
+        document.querySelector('#curtain')?.scrollIntoView({ behavior: 'smooth' });
+      }, 800);
+    }
+  });
 });
 
-// Also try playing on scroll
-document.addEventListener('scroll', function playMusicOnScroll() {
-  if (bgMusic && bgMusic.paused) {
-    bgMusic.play().catch(e => {});
+// === Curtain Reveal ===
+const curtainShell = document.getElementById('curtainShell');
+document.getElementById('revealCurtainBtn')?.addEventListener('click', () => {
+  curtainShell?.classList.toggle('open');
+});
+
+// === Replay Button ===
+document.querySelectorAll('[data-replay]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    celebrationStage?.classList.remove('lit');
+    curtainShell?.classList.remove('open');
+    stepButtons.forEach(b => b.classList.remove('active'));
+    currentSlide = 0;
+    if (slides.length > 0) setSlide(0);
+    if (balloonLayer) balloonLayer.innerHTML = '';
+    if (music) { music.pause(); musicStarted = false; music.currentTime = 0; }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// === Background Music - Play on first user interaction ===
+function tryPlayMusic() {
+  if (bgMusic && !musicStarted) {
+    bgMusic.play().catch(() => {});
+    musicStarted = true;
   }
-  document.removeEventListener('scroll', playMusicOnScroll);
+  document.removeEventListener('click', tryPlayMusic);
+  document.removeEventListener('scroll', tryPlayMusic);
+  document.removeEventListener('touchstart', tryPlayMusic);
+}
+document.addEventListener('click', tryPlayMusic, { once: true });
+document.addEventListener('scroll', tryPlayMusic, { once: true });
+document.addEventListener('touchstart', tryPlayMusic, { once: true });
+
+// === Scroll Animations (Intersection Observer) ===
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -10% 0px' };
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.section').forEach(section => {
+  section.style.opacity = '0';
+  section.style.transform = 'translateY(30px)';
+  section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+  sectionObserver.observe(section);
+});
+
+// === Header Scroll Effect ===
+const header = document.querySelector('.site-header');
+let lastScrollY = 0;
+window.addEventListener('scroll', () => {
+  const currentY = window.scrollY;
+  if (currentY > 80) header?.classList.add('scrolled');
+  else header?.classList.remove('scrolled');
+  lastScrollY = currentY;
+}, { passive: true });
+
+// === Active Nav Link Highlight ===
+const sections = document.querySelectorAll('.section[id]');
+const navLinksArr = document.querySelectorAll('.nav-links a');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinksArr.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+      });
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(sec => navObserver.observe(sec));
+
+// === Memory Card Lightbox (Simple) ===
+document.querySelectorAll('.memory-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const img = card.querySelector('img');
+    if (!img) return;
+    // Create a fullscreen overlay
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;transition:opacity 0.3s ease;';
+    const overlayImg = document.createElement('img');
+    overlayImg.src = img.src;
+    overlayImg.alt = img.alt;
+    overlayImg.style.cssText = 'max-width:90vw;max-height:80vh;object-fit:contain;border-radius:var(--radius-xl);box-shadow:0 20px 80px rgba(0,0,0,0.5);';
+    overlay.appendChild(overlayImg);
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', () => {
+      overlay.style.opacity = '0';
+      setTimeout(() => overlay.remove(), 300);
+    });
+  });
 });
